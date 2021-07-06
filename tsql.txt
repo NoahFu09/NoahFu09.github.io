@@ -1,0 +1,653 @@
+
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Users]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Status]
+GO
+/****** Object:  Table [dbo].[Shippings]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Shippings]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Roles]
+GO
+/****** Object:  Table [dbo].[Propertys]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Propertys]
+GO
+/****** Object:  Table [dbo].[ProductsProperty]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[ProductsProperty]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Products]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Payments]
+GO
+/****** Object:  Table [dbo].[OrdersDetail]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[OrdersDetail]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Orders]
+GO
+/****** Object:  Table [dbo].[Collects]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Collects]
+GO
+/****** Object:  Table [dbo].[Categorys]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Categorys]
+GO
+/****** Object:  Table [dbo].[Carts]    Script Date: 2021/7/6 下午 01:55:28 ******/
+DROP TABLE IF EXISTS [dbo].[Carts]
+GO
+/****** Object:  Table [dbo].[Carts]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Carts](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[lot_no] [nvarchar](50) NULL,
+	[user_email] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[qty] [int] NULL,
+	[price] [int] NULL,
+	[amount] [int] NULL,
+	[create_time] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categorys]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categorys](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[parentid] [int] NULL,
+	[category_no] [nvarchar](50) NULL,
+	[category_name] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Collects]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Collects](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[user_email] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[price] [int] NULL,
+	[create_time] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[order_no] [nvarchar](50) NULL,
+	[order_date] [datetime] NULL,
+	[order_status] [nvarchar](50) NULL,
+	[user_email] [nvarchar](50) NULL,
+	[payment_no] [nvarchar](50) NULL,
+	[shipping_no] [nvarchar](50) NULL,
+	[receive_name] [nvarchar](50) NULL,
+	[receive_email] [nvarchar](50) NULL,
+	[receive_address] [nvarchar](250) NULL,
+	[totals] [int] NULL,
+	[remark] [nvarchar](250) NULL,
+	[order_guid] [nvarchar](50) NULL,
+	[order_closed] [int] NULL,
+	[order_validate] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrdersDetail]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrdersDetail](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[order_no] [nvarchar](50) NULL,
+	[category_name] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](50) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[price] [int] NULL,
+	[qty] [int] NULL,
+	[amount] [int] NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payments](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[categoryid] [int] NULL,
+	[category_name] [nvarchar](250) NULL,
+	[istop] [int] NULL,
+	[ishot] [int] NULL,
+	[issale] [int] NULL,
+	[isMB] [int] NULL,
+	[isVGA] [int] NULL,
+	[isRAM] [int] NULL,
+	[isSSD] [int] NULL,
+	[isPOWER] [int] NULL,
+	[isCPU] [int] NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[price_sale] [int] NULL,
+	[price_cost] [int] NULL,
+	[price_discont] [int] NULL,
+	[remark] [nvarchar](max) NULL,
+ CONSTRAINT [PK__tmp_ms_x__4B5BD7F842727ADC] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductsProperty]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductsProperty](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[product_no] [nvarchar](50) NULL,
+	[property_no] [nvarchar](50) NULL,
+	[text_value] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Propertys]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Propertys](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[mvalue] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Shippings]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Shippings](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 2021/7/6 下午 01:55:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mname] [nvarchar](50) NULL,
+	[password] [nvarchar](50) NULL,
+	[user_email] [nvarchar](50) NULL,
+	[phone] [nvarchar](50) NULL,
+	[role_no] [nvarchar](50) NULL,
+	[birthday] [date] NULL,
+	[remark] [nvarchar](250) NULL,
+	[varify_code] [nvarchar](50) NULL,
+	[isvarify] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Carts] ON 
+GO
+INSERT [dbo].[Carts] ([rowid], [lot_no], [user_email], [product_no], [product_name], [product_spec], [qty], [price], [amount], [create_time]) VALUES (75, N'C338BF3B-B5D0-4', N'admin@gmail.com', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 2, 6999, 13998, CAST(N'2021-07-01T15:29:12.000' AS DateTime))
+GO
+INSERT [dbo].[Carts] ([rowid], [lot_no], [user_email], [product_no], [product_name], [product_spec], [qty], [price], [amount], [create_time]) VALUES (76, N'C338BF3B-B5D0-4', N'admin@gmail.com', N'M0002', N'AMD B560 Ryzen AM4 AT 主機板', N'', 1, 6999, 6999, CAST(N'2021-07-01T15:29:12.000' AS DateTime))
+GO
+INSERT [dbo].[Carts] ([rowid], [lot_no], [user_email], [product_no], [product_name], [product_spec], [qty], [price], [amount], [create_time]) VALUES (91, N'1778E32E-1005-4', N'admin@gmail.com', N'M0001', N'Intel® B560 (LGA 1200) mATX 主機板', N'', 1, 4999, 4999, CAST(N'2021-07-01T20:42:19.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Carts] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Categorys] ON 
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (1, 0, N'A', N'電腦零件')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (2, 0, N'B', N'電腦周邊')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (3, 1, N'A01', N'記憶體RAM')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (4, 1, N'A02', N'處理器CPU')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (5, 1, N'A03', N'顯示卡GPU')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (6, 2, N'B01', N'隨身碟')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (7, 2, N'B02', N'滑鼠')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (8, 3, N'A0101', N'桌上型電腦記憶體')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (9, 3, N'A0102', N'筆記型電腦記憶體')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (10, 4, N'A0201', N'INTEL')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (11, 4, N'A0202', N'AMD')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (12, 5, N'A0301', N'NVIDIA')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (13, 5, N'A0301', N'AMD')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (14, 6, N'B0101', N'固態隨身硬碟')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (15, 1, N'A04', N'主機板MB')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (16, 1, N'A05', N'硬碟SSD')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (17, 1, N'A06', N'電源供應器POWER')
+GO
+SET IDENTITY_INSERT [dbo].[Categorys] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Collects] ON 
+GO
+INSERT [dbo].[Collects] ([rowid], [user_email], [product_no], [product_name], [price], [create_time]) VALUES (13, N'', N'2021061401', N'ADATA 威剛 DDR4 2666 16GB 筆記型記憶體', 2499, CAST(N'2021-06-14T23:23:25.450' AS DateTime))
+GO
+INSERT [dbo].[Collects] ([rowid], [user_email], [product_no], [product_name], [price], [create_time]) VALUES (15, N'', N'M0002', N'AMD B550 Ryzen AM4 ATX 主機板', 6999, CAST(N'2021-06-24T12:23:01.390' AS DateTime))
+GO
+INSERT [dbo].[Collects] ([rowid], [user_email], [product_no], [product_name], [price], [create_time]) VALUES (17, N'n4896887@gmail.com', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', 6999, CAST(N'2021-06-24T14:35:15.217' AS DateTime))
+GO
+INSERT [dbo].[Collects] ([rowid], [user_email], [product_no], [product_name], [price], [create_time]) VALUES (18, N'', N'S0001', N'Crucial Crucial 1TB', 2999, CAST(N'2021-07-01T15:36:05.637' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Collects] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Orders] ON 
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (1, N'00000001', CAST(N'2020-11-24T16:23:37.960' AS DateTime), N'OR', N'001@gmail.com', N'01', N'01', N'許志強', N'johnson.ezmail@gmail.com', N'台北市', 2700, N'', N'6A13A2DA-43E5-4BE8-B757-6', 1, 1)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (2, N'00000002', CAST(N'2020-12-05T16:25:36.923' AS DateTime), N'CP', N'001@gmail.com', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 5400, N'', N'ECE2E173-1FF4-47CA-92E8-A', 1, 1)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (3, N'00000003', CAST(N'2021-06-03T11:08:16.853' AS DateTime), N'ON', N'001@gmail.com', N'04', N'01', N'貓貓', N'meow@gmail.com', N'台北市', 34125, N'', N'EB0D1B80-D12B-4F0F-91BB-A', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (4, N'00000004', CAST(N'2021-06-03T11:13:34.537' AS DateTime), N'ON', N'001@gmail.com', N'04', N'02', N'喵喵', N'meow@gmail.com', N'桃園市', 32500, N'', N'1289CB99-F23B-4B7D-BF68-6', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (5, N'00000005', CAST(N'2021-06-03T11:17:24.953' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'嗨嗨', N'hihi@gmail.com', N'新北勢', 6500, N'', N'81900E2D-F285-4ED8-95FB-E', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (6, N'00000006', CAST(N'2021-06-03T11:34:58.007' AS DateTime), N'ON', N'001@gmail.com', N'02', N'02', N'喵喵', N'kkk@gmail.com', N'新北勢', 9199, N'', N'6093EB74-0202-42A5-8A5A-1', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (7, N'00000007', CAST(N'2021-06-03T11:39:04.063' AS DateTime), N'ON', N'', N'01', N'01', N'123', N'123@gmail.com', N'1111', 0, N'', N'092FC259-24FD-48E1-AE7B-F', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (8, N'00000008', CAST(N'2021-06-03T13:57:47.910' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'喵喵', N'123@gmail.com', N'東京市', 6500, N'', N'D1710F4B-C63C-407F-B876-9', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (9, N'00000009', CAST(N'2021-06-03T14:08:16.080' AS DateTime), N'ON', N'001@gmail.com', N'04', N'01', N'qqqq', N'qqq@gmail.com', N'東京', 6500, N'', N'4EB80795-0F22-4358-942D-A', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (10, N'00000010', CAST(N'2021-06-03T14:16:12.273' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'嘿嘿', N'hey@gmail.com', N'USA', 13000, N'', N'5F7E112D-7AE5-4CC9-A024-2', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (11, N'00000011', CAST(N'2021-06-03T14:23:06.040' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'傅秉淇', N'001@gmail.com', N'東京', 5500, N'', N'A1D77340-EC35-4077-B522-7', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (12, N'00000012', CAST(N'2021-06-03T14:24:38.070' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'傅秉淇', N'n777@gmail.com', N'東京都', 10796, N'', N'AB68B945-D562-4BF6-A5AC-5', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (13, N'00000013', CAST(N'2021-06-03T14:24:50.137' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'喵喵', N'n777@gmail.com', N'東京都', 0, N'', N'F4048EAC-CCEA-4D4B-82A6-E', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (14, N'00000014', CAST(N'2021-06-03T14:25:06.540' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'喵喵', N'456@gmail.com', N'東京都', 0, N'', N'AA35EE7F-FD51-484D-920B-B', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (15, N'00000015', CAST(N'2021-06-03T14:34:20.530' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'456', N'456@gmail.com', N'東京都', 5500, N'', N'BA92328A-0BD2-4457-B8EE-8', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (16, N'00000016', CAST(N'2021-06-03T14:42:14.320' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'JOJO', N'JOJO@gmail.com', N'東京市', 5500, N'', N'622990DE-B57A-46A6-AEB0-D', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (17, N'00000017', CAST(N'2021-06-03T15:52:46.647' AS DateTime), N'OR', N'001@gmail.com', N'02', N'02', N'天線寶寶', N'baby@hotmail.com', N'快樂世界', 5500, N'', N'B0FCDEFF-320B-4C10-A5C0-9', 1, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (18, N'00000018', CAST(N'2021-06-12T14:32:42.207' AS DateTime), N'ON', N'n4896887@gmail.com', N'01', N'01', N'傅秉淇', N'n4896887@gmail.com', N'桃園市', 9499, N'', N'F5240338-FA98-4F0C-BD84-A', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (19, N'00000019', CAST(N'2021-06-21T14:16:17.433' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'汪汪隊', N'wang@gmail.com', N'台北市', 2499, N'', N'BA414AE3-0EE1-4BCD-B52E-4', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (20, N'00000020', CAST(N'2021-06-21T16:54:15.797' AS DateTime), N'ON', N'001@gmail.com', N'04', N'01', N'汪汪', N'wang@gmail.com', N'台北市', 3999, N'', N'685276A3-1D8F-4BD5-BE20-3', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (21, N'00000021', CAST(N'2021-06-21T17:30:18.703' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'000', N'000@gmail.com', N'台北市', 3999, N'', N'49DEA1E3-303C-4F16-B46D-4', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (22, N'00000022', CAST(N'2021-06-21T17:31:31.420' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'000', N'000@gmail.com', N'台北市', 3999, N'', N'D47D3838-A8D1-4EA0-917A-9', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (23, N'00000023', CAST(N'2021-06-21T17:35:23.237' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 2499, N'', N'DCAAD7E7-6A91-4592-850F-9', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (24, N'00000024', CAST(N'2021-06-21T17:36:48.203' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 3999, N'', N'E0F4DA61-653B-4166-91CC-1', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (25, N'00000025', CAST(N'2021-06-21T17:39:38.527' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'汪汪', N'001@gmail.com', N'台北市', 3999, N'', N'C08B049A-F313-488D-B908-2', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (26, N'00000026', CAST(N'2021-06-21T17:43:12.817' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 3999, N'', N'5689AB9F-7DE1-4663-B9AB-2', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (27, N'00000027', CAST(N'2021-06-21T17:56:56.750' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 3999, N'', N'C27AD1A2-1159-46D9-9117-2', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (28, N'00000028', CAST(N'2021-06-21T18:32:29.650' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 3999, N'', N'302C093A-616D-4B22-8910-1', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (29, N'00000029', CAST(N'2021-06-21T19:26:20.990' AS DateTime), N'ON', N'', N'01', N'01', N'001', N'001@gmail.com', N'台北市', 29493, N'', N'F0C07A16-BEBF-40CC-B29F-E', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (30, N'00000030', CAST(N'2021-06-21T23:28:51.913' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'Taipei', 3999, N'', N'AB12802A-63AE-44D0-8E5E-7', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (31, N'00000031', CAST(N'2021-06-21T23:35:38.540' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'Wan', N'wang@gmail.com', N'Taipei', 3999, N'', N'9B7621D4-10B1-4D98-8B69-4', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (32, N'00000032', CAST(N'2021-06-21T23:38:35.613' AS DateTime), N'ON', N'001@gmail.com', N'01', N'01', N'001', N'001@gmail.com', N'付款方式', 3999, N'', N'E87DEAD8-D008-4638-A8E1-D', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (33, N'00000033', CAST(N'2021-06-23T23:22:23.693' AS DateTime), N'ON', N'', N'01', N'01', N'小麥', N'000@gmail.com', N'台北市', 4998, N'', N'FAC49B53-72A2-4A49-BD81-F', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (34, N'00000034', CAST(N'2021-06-24T14:33:14.750' AS DateTime), N'ON', N'n4896887@gmail.com', N'01', N'01', N'mao', N'mao@gmail.com', N'台北市', 13998, N'', N'ECEA54C7-B3CB-4FEF-A575-C', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (35, N'00000035', CAST(N'2021-07-01T19:05:08.583' AS DateTime), N'ON', N'', N'01', N'01', N'汪汪', N'wang@gmail.com', N'桃園市', 139979, N'', N'A95998FB-5F00-45C7-9C8A-9', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_email], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (36, N'00000036', CAST(N'2021-07-01T19:08:02.433' AS DateTime), N'ON', N'', N'01', N'01', N'傅秉淇', N'n4896887@gmail.com', N'桃園市', 6850, N'', N'10712E0F-EB17-43A0-B0AE-C', 0, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Orders] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrdersDetail] ON 
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (1, N'00000001', N'電腦零件/記憶體RAM/桌上型電腦記憶體', N'2021052801', N'威剛 XPG DDR4- 3200 D50 (RGB) 16GB', NULL, 2700, 1, 2700, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (2, N'00000002', N'電腦零件/記憶體RAM/桌上型電腦記憶體', N'2021052801', N'威剛 XPG DDR4- 3200 D50 (RGB) 16GB', NULL, 2700, 2, 5400, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (3, N'00000011', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021060201', N'Kingston 16GB DDR4 2666', N'', 5500, 1, 5500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (4, N'00000012', N'電腦零件/記憶體RAM/桌上型電腦記憶體', N'20210602', N'Kingston 16GB DDR4 2666 桌上型記憶體(KVR26N19D8/16)', N'', 2699, 4, 10796, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (5, N'00000015', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021060201', N'Kingston 16GB DDR4 2666', N'', 5500, 1, 5500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (6, N'00000016', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021060201', N'Kingston 16GB DDR4 2666', N'', 5500, 1, 5500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (7, N'00000017', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021060201', N'Kingston 16GB DDR4 2666', N'', 5500, 1, 5500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (8, N'00000018', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021060302', N'SP廣穎 Armor 4TB 2.5吋Game Drive電競 ', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (9, N'00000018', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021053101', N'SAMSUNG 三星 980', N'容量=1TB', 6500, 1, 6500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (10, N'00000019', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021061401', N'ADATA 威剛 DDR4 2666 16GB 筆記型記憶體', N'容量=8G', 2499, 2, 2499, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (11, N'00000020', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (12, N'00000021', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (13, N'00000022', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (14, N'00000023', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021061401', N'ADATA 威剛 DDR4 2666 16GB 筆記型記憶體', N'容量=8G', 2499, 1, 2499, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (15, N'00000024', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (16, N'00000025', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (17, N'00000026', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (18, N'00000027', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (19, N'00000028', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (20, N'00000029', N'', N'2021060302', N'SP廣穎 Armor 4TB 2.5吋Game Drive電競 ', N'', 2999, 2, 5998, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (21, N'00000029', N'', N'2021053101', N'SAMSUNG 三星 980', N'容量=1TB', 6500, 1, 6500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (22, N'00000029', N'', N'2021060302', N'SP廣穎 Armor 4TB 2.5吋Game Drive電競 ', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (23, N'00000029', N'', N'2021060302', N'SP廣穎 Armor 4TB 2.5吋Game Drive電競 ', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (24, N'00000029', N'', N'2021060302', N'SP廣穎 Armor 4TB 2.5吋Game Drive電競 ', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (25, N'00000029', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (26, N'00000029', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (27, N'00000030', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (28, N'00000031', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (29, N'00000032', N'電腦周邊/隨身碟/固態隨身硬碟', N'2021061402', N'SanDisk E60 1TB 行動固態硬碟', N'', 3999, 1, 3999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (30, N'00000033', N'電腦零件/記憶體RAM/筆記型電腦記憶體', N'2021061401', N'ADATA 威剛 DDR4 2666 16GB 筆記型記憶體', N'容量=8G', 2499, 2, 4998, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (31, N'00000034', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 2, 13998, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (32, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1200) mATX 主機板', N'', 5999, 2, 11998, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (33, N'00000035', N'電腦零件/記憶體RAM/桌上型電腦記憶體', N'C0001', N'AMD Ryzen 5 5700X', N'', 9999, 1, 9999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (34, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1200) mATX 主機板', N'', 5999, 1, 5999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (35, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1200) mATX 主機板', N'', 5999, 1, 5999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (36, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 5, 34995, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (37, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 1, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (38, N'00000035', N'電腦零件', N'S0001', N'Crucial Crucial 1TB', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (39, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 1, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (40, N'00000035', N'電腦零件', N'V0001', N'ASUS TUF GAMING Radeon™ RX 6900 XT', N'', 8999, 1, 8999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (41, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 1, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (42, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 2, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (43, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 1, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (44, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 1, 6999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (45, N'00000035', N'電腦零件', N'M0001', N'Intel® B560 (LGA 1100) mATX 主機板', N'', 6999, 2, 13998, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (46, N'00000035', N'電腦零件', N'S0001', N'Crucial Crucial 1TB', N'', 2999, 1, 2999, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (47, N'00000036', N'電腦零件', N'P0001', N'ROG-STRIX-850G-WHITE', N'', 6850, 1, 6850, N'')
+GO
+SET IDENTITY_INSERT [dbo].[OrdersDetail] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Payments] ON 
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (1, N'01', N'信用卡一次付清', N'')
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (2, N'02', N'ATM轉帳', N'')
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (3, N'03', N'信用卡分3期', N'')
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (5, N'04', N'超商貨到付款', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Payments] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Products] ON 
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (9, 5, N'電腦零件/顯示卡GPU', 1, 1, 1, 0, 1, 0, 0, 0, 0, N'V0001', N'ASUS TUF GAMING Radeon™ RX 6900 XT', N'顯示卡 VGA 「人機對話」的重要裝置之一，將電腦需要的顯示資訊進行轉換，並控制電腦的正確顯示，是連接顯示器和主機板的重要元件。', 8999, 8999, 8999, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (11, 15, N'電腦零件/主機板MB', 1, 1, 1, 1, 0, 0, 0, 0, 0, N'M0002', N'AMD B570 Ryzen AM4 AT 主機板', N'配備 PCIe® 4.0、雙 Thunderbolt™ 4 Type-C 連接埠、雙 Intel® 2.5Gb 乙太網路、含散熱器的雙 M.2、USB 3.2 Gen 2 和進階安全管理功能。', 6999, 6999, 6999, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (12, 4, N'電腦零件/處理器CPU', 1, 1, 1, 0, 0, 0, 0, 0, 0, N'C0001', N'AMD Ryzen 5 5800X', N'6個核心能夠給遊戲帶來驚人性能，[AMD StoreMI技術]配備AMD Ryzen處理器,可快速方便地擴展和高速化。', 9999, 9999, 9999, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (14, 16, N'電腦零件/硬碟SSD', 1, 1, 1, 0, 0, 0, 1, 0, 0, N'S0001', N'Crucial Crucial 2TB', N'Crucial SSD BX500 內置SSD 2.5英寸7mm 容量: 1TB(1000GB)', 2999, 2999, 2999, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (15, 17, N'電腦零件/電源供應器POWER', 1, 1, 1, 0, 0, 0, 0, 1, 0, N'P0001', N'ROG-STRIX-850G-WHITE', N'讓您在相對較安靜的環境中享受輕量的遊戲。80 Plus Gold 金牌認證是採用日製電容器及其他頂級組件的成果。', 6850, 6850, 6850, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (16, 5, N'電腦零件/顯示卡GPU', 0, 0, 1, 0, 1, 0, 0, 0, 0, N'V0002', N'ASUS Radeon™ RX 6900 XT 16GB GDDR6', N'全新光線加速引擎可處理光線的交叉點，提供高效能硬體加速光線追蹤。透過 DirectX® 12 Ultimate 享受真正的沈浸式遊戲體驗。藉由 Radeon™ Anti-lag 更低的輸入延遲獲得競爭優勢。', 13000, 13000, 13000, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (18, 16, N'電腦零件/硬碟SSD', 0, 0, 1, 0, 0, 0, 1, 0, 0, N'S0002', N'Western Digital SSD 1TB', N'WD Blue SN550 NVMe實現了最高水平的SATA SSD的4倍以上的速度，1TB超大容量。', 6000, 6000, 6000, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (19, 17, N'電腦零件/電源供應器POWER', 0, 0, 1, 0, 0, 0, 0, 1, 0, N'P0002', N' ROG-STRIX-1000G', N'ROG 散熱片 覆蓋關鍵組件，確保低溫並降低噪音。軸向式風扇設計 採用更細長的扇葉和獨特的環形密封環，以增加向下的氣壓。雙滾珠軸承設計 使用壽命是油封軸承設計的兩倍。', 4500, 4500, 4500, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (21, 4, N'電腦零件/處理器CPU', 0, 0, 1, 0, 0, 0, 0, 0, 0, N'C0002', N'INTEL 第10代CPU Comet Lake-S Corei5-10300F', N'處理器: i5-10400F / 插槽: LGA 1200 頻率(最大): 2.90 GHz(4.30 GHz) / 核心數: 6 / 線程數量: 12', 14000, 14000, 14000, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (24, 15, N'電腦零件/主機板MB', 0, 0, 1, 1, 0, 0, 0, 0, 0, N'M0001', N'Intel® B560 (LGA 1200) mATX 主機板', N'Intel® B560 (LGA 1200) mATX 主機板配備 PCIe 4.0、雙 M.2 插槽、8 個功率級、Realtek 2.5Gb 乙太網路、DisplayPort 1.4、HDMI 2.0、USB 3.2 Gen 2 Type-C、Aura Sync RGB 燈光效果、可定址 RGB Intel® LGA 1200 插槽：支援第 10、11 代 Intel® Core™ 處理器', 4999, 4999, 4999, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (25, 3, N'電腦零件/記憶體RAM', 0, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, N'R0001', N'KLEVV科賦DDR4 U-DIMM標準記憶體', N'著重效能與實用性，KLEVV科賦DDR4標準型記憶體是您最划算與實際的電腦裝機選擇 由內而外追求精細， 黑色霧面的PCB板讓產品低調中更顯型格 通過各大主機板廠商QVL測試，能良好相容於市面上各大主流主機板系統，包括Intel與AMD系列平台', 3999, 3999, 3999, NULL)
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [isMB], [isVGA], [isRAM], [isSSD], [isPOWER], [isCPU], [product_no], [product_name], [product_spec], [price_sale], [price_cost], [price_discont], [remark]) VALUES (26, 3, N'電腦零件/記憶體RAM', 0, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, N'R0002', N'F4-2400C15D-16GVR', N'芝奇G.SKILL Ripjaws V 8G*2 雙通道 DDR4-2400 CL15(紅色)(F4-2400C15D-16GVR)終身保固', 2999, 2999, 2999, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Products] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ProductsProperty] ON 
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (1, N'2021052801', N'size', N'8G,16G,32G', N'')
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (3, N'2021053101', N'size', N'1TB,2TB', N'')
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (4, N'2021061401', N'size', N'8G,16G', N'')
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (5, N'C0001', N'color', N'白,紅,藍', N'')
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (6, N'R0002', N'size', N'8G,16G,32G', N'')
+GO
+SET IDENTITY_INSERT [dbo].[ProductsProperty] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Propertys] ON 
+GO
+INSERT [dbo].[Propertys] ([rowid], [mno], [mname], [mvalue], [remark]) VALUES (1, N'size', N'容量', N'8G,16G,32G,64G,128G', N'')
+GO
+INSERT [dbo].[Propertys] ([rowid], [mno], [mname], [mvalue], [remark]) VALUES (3, N'color', N'顏色', N'紅,黃,綠,藍', N'')
+GO
+SET IDENTITY_INSERT [dbo].[Propertys] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Roles] ON 
+GO
+INSERT [dbo].[Roles] ([rowid], [mno], [mname], [remark]) VALUES (1, N'User', N'會員', N'')
+GO
+INSERT [dbo].[Roles] ([rowid], [mno], [mname], [remark]) VALUES (2, N'Admin', N'管理者', N'')
+GO
+SET IDENTITY_INSERT [dbo].[Roles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Shippings] ON 
+GO
+INSERT [dbo].[Shippings] ([rowid], [mno], [mname], [remark]) VALUES (1, N'01', N'超商取貨', N'')
+GO
+INSERT [dbo].[Shippings] ([rowid], [mno], [mname], [remark]) VALUES (2, N'02', N'物流配送', N'')
+GO
+SET IDENTITY_INSERT [dbo].[Shippings] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Status] ON 
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (1, N'ON', N'已下單未付款', N'已下單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (2, N'PP', N'已付款處理中', N'處理中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (3, N'DS', N'已出貨未到店', N'已出貨')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (4, N'SR', N'已到店未領取', N'未領取')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (5, N'PN', N'未付款處理中', N'處理中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (6, N'CP', N'已領取已付款', N'已領取')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (7, N'OP', N'已下單已付款', N'已下單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (8, N'DU', N'已出貨未到府', N'已出貨')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (9, N'HD', N'訂單保留', N'保留中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (10, N'OR', N'取消訂單', N'取消訂單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (11, N'RT', N'已退貨', N'已退貨')
+GO
+SET IDENTITY_INSERT [dbo].[Status] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (1, N'哆啦B夢', N'ej5rFst19I+4l+/zrnMvMVT20gO1PzNmDwG0w7a8Lfk=', N'001@gmail.com', N'0912345678', N'Member', CAST(N'2020-10-22' AS Date), N'TEST001', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (2, N'管理員', N'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', N'admin@gmail.com', N'0931234568', N'Admin', CAST(N'1996-12-25' AS Date), N'我是管理員001', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (7, N'貓吃饅頭', N'HT9KHhnJivGO4gl+TUJth2PO1iB9TrwgssQCUYQvbwY=', N'meow@gmail.com', NULL, N'Member', CAST(N'2021-05-05' AS Date), N'', N'ABD9A378-6BCF-457A-BFEC-24DC9F606E45', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (8, N'YCLin', N'va25pNI9z7UZZ3jXL5IOPYtMyHT/mC7AUYC58iTkr2Q=', N'YCLin@gmail.com', NULL, N'Member', CAST(N'2021-05-25' AS Date), N'TEST', N'2C942FF6-D1CD-4087-A10E-FF8D5036E134', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (9, N'mao', N'K26CQPtaUdJk0nlMxXl1fMpZD5+AdkC70oJr62sPiNw=', N'mao@gmail.com', NULL, N'Member', CAST(N'1996-02-28' AS Date), N'', N'3D5F731C-1FC9-44EC-968C-0E750DE57C80', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (10, N'yyyy', N'S2XOJzMp9a5OpUq/IM7vf8t5VVPjOvhTc+BgeX4PVxY=', N'yorushika@gmail.com', NULL, N'Member', CAST(N'2021-06-09' AS Date), N'', N'3EBAA24E-F27F-4F3A-905D-A84B16F5A61E', 0)
+GO
+INSERT [dbo].[Users] ([rowid], [mname], [password], [user_email], [phone], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (17, N'rrr', N'eYK9btR/5yHIl6ezvTE1BLfgAhrsmxc6JTcSb4QT6XY=', N'rrr@gmail.com', NULL, N'Member', CAST(N'2021-06-17' AS Date), N'', N'C0C1D8A7-5480-442B-899B-32605F0F9F1F', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
